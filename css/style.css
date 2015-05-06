@@ -1,0 +1,301 @@
+body {
+	-webkit-font-smoothing: antialiased;
+	background:#fffeff;
+}
+
+::selection {
+  background-color: rgba(68,187,255,.5);
+}
+
+a:focus,
+a:active {
+	outline: none !important;
+}
+
+#ribbon {
+	 background: url(../images/vimeo.svg) repeat-x top left;
+	 display: block;
+	 width: 100%;
+	 height: 5px;
+}
+
+/*  Bootstrap Clearfix */
+
+/*  Tablet  */
+@media (min-width:767px){
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+/*  Medium Desktop  */
+@media (min-width:992px){
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+/*  Large Desktop  */
+@media (min-width:1200px){
+
+  /* Column clear fix */
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+/* Bootstrap Overrides */
+.navbar {
+	min-height:60px;
+}
+
+.navbar-brand {
+	padding: 10px 15px;
+	height: 60px;
+}
+
+
+.btn-white {
+	color: #d9d9d9;
+	border: 3px solid #d9d9d9;
+	background: transparent;
+	border-radius: 0;
+}
+
+.btn-white:hover {
+		color: #fff;
+		border: 3px solid #fff;
+		background: transparent;
+}
+
+.tile {
+	z-index: 1;
+	margin-bottom: 30px;
+}
+
+.tile a .tile-info-container {
+	background-size: cover !important;
+	background-position: center center !important;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 2;
+	height: 410px;
+}
+.tile a .tile-info-container .tile-gradient {
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+}
+
+.tile a .tile-info-container .btn-container {
+	text-align: center;
+	padding-top: 180px;
+	padding-bottom: 40px;
+	z-index: 4;
+	position: relative;
+}
+.tile a .tile-info-container .info-container {
+	padding: 10px;
+	z-index: 4;
+	bottom: 10px;
+	position: absolute;
+}
+.tile a .tile-info-container .info-container h3 {
+	font-weight: bold;
+	color: #d9d9d9;
+}
+.tile a .tile-info-container .info-container .timestamp {
+	display: block;
+	color: #d9d9d9;
+}
+
+.tile a:hover {
+	text-decoration: none;
+}
+
+
+.tile a:hover .tile-info-container .btn-container .btn-white {
+	color: #fff;
+	border: 3px solid #fff;
+}
+
+.tile a:hover .tile-info-container .info-container h3, .tile a:hover .tile-info-container .info-container .timestamp{
+	color: #fff;
+}
+
+
+/* Spinner */
+
+@-webkit-keyframes spinning {
+    0%, 100% {
+        box-shadow:
+             0em  1em 0 .125em black, /* bottom */
+             1em  1em 0 .250em black, /* bottom right */
+             1em  0em 0 .125em black, /* right */
+             1em -1em 0    0em black, /* top right */
+             0em -1em 0    0em black, /* top */
+            -1em -1em 0    0em black, /* top left */
+            -1em  0em 0    0em black, /* left */
+            -1em  1em 0    0em black; /* bottom left */
+    }
+
+    12.5% {
+        box-shadow:
+             0em  1em 0    0em black, /* bottom */
+             1em  1em 0 .125em black, /* bottom right */
+             1em  0em 0 .250em black, /* right */
+             1em -1em 0 .125em black, /* top right */
+             0em -1em 0    0em black, /* top */
+            -1em -1em 0    0em black, /* top left */
+            -1em  0em 0    0em black, /* left */
+            -1em  1em 0    0em black; /* bottom left */
+    }
+
+    25% {
+        box-shadow:
+             0em  1em 0    0em black, /* bottom */
+             1em  1em 0    0em black, /* bottom right */
+             1em  0em 0 .125em black, /* right */
+             1em -1em 0 .250em black, /* top right */
+             0em -1em 0 .125em black, /* top */
+            -1em -1em 0    0em black, /* top left */
+            -1em  0em 0    0em black, /* left */
+            -1em  1em 0    0em black; /* bottom left */
+    }
+
+    37.5% {
+        box-shadow:
+             0em  1em 0    0em black, /* bottom */
+             1em  1em 0    0em black, /* bottom right */
+             1em  0em 0    0em black, /* right */
+             1em -1em 0 .125em black, /* top right */
+             0em -1em 0 .250em black, /* top */
+            -1em -1em 0 .125em black, /* top left */
+            -1em  0em 0    0em black, /* left */
+            -1em  1em 0    0em black; /* bottom left */
+    }
+
+    50% {
+        box-shadow:
+             0em  1em 0    0em black, /* bottom */
+             1em  1em 0    0em black, /* bottom right */
+             1em  0em 0    0em black, /* right */
+             1em -1em 0    0em black, /* top right */
+             0em -1em 0 .125em black, /* top */
+            -1em -1em 0 .250em black, /* top left */
+            -1em  0em 0 .125em black, /* left */
+            -1em  1em 0    0em black; /* bottom left */
+    }
+
+    62.5% {
+        box-shadow:
+             0em  1em 0    0em black, /* bottom */
+             1em  1em 0    0em black, /* bottom right */
+             1em  0em 0    0em black, /* right */
+             1em -1em 0    0em black, /* top right */
+             0em -1em 0    0em black, /* top */
+            -1em -1em 0 .125em black, /* top left */
+            -1em  0em 0 .250em black, /* left */
+            -1em  1em 0 .125em black; /* bottom left */
+    }
+
+    75% {
+        box-shadow:
+             0em  1em 0 .125em black, /* bottom */
+             1em  1em 0    0em black, /* bottom right */
+             1em  0em 0    0em black, /* right */
+             1em -1em 0    0em black, /* top right */
+             0em -1em 0    0em black, /* top */
+            -1em -1em 0    0em black, /* top left */
+            -1em  0em 0 .125em black, /* left */
+            -1em  1em 0 .250em black; /* bottom left */
+    }
+
+    87.5% {
+        box-shadow:
+             0em  1em 0 .250em black, /* bottom */
+             1em  1em 0 .125em black, /* bottom right */
+             1em  0em 0    0em black, /* right */
+             1em -1em 0    0em black, /* top right */
+             0em -1em 0    0em black, /* top */
+            -1em -1em 0    0em black, /* top left */
+            -1em  0em 0    0em black, /* left */
+            -1em  1em 0 .125em black; /* bottom left */
+    }
+}
+
+.spinner {
+    display: block;
+    font-size: 16px;
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    -webkit-animation: spinning .75s infinite;
+    margin: 50px auto;
+
+}
+
