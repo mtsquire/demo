@@ -27,6 +27,11 @@
             <img alt="Brand" src="images/logo.svg">
           </a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://marcsquire.com" class="signature">Marc Squire</a>
+        </li>
+      </ul>
       </div>
     </nav>
     <div class="container">
@@ -127,9 +132,15 @@
                   description = data[i].description,
                   videoUrl = data[i].url,
                   userName = data[i].user_name,
-                  thumb = data[i].thumbnail_large;
+                  thumb = data[i].thumbnail_large
+                  tags = data[i].tags.split(',', 0);
+
 
               $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><a href="'+videoUrl+'"><div class="tile-info-container" style="background:url('+thumb+')"><div class="tile-gradient"></div><div class="btn-container"><div class="btn btn-white">Watch</div></div><div class="info-container"><h3>'+title+'</h3><span class="timestamp">'+userName+'</span></div></div></a></div>');
+
+
+
+              console.log(tags);
 
               $('.spinner').remove();
               $('.vimeo').css('display', 'block');
