@@ -1,6 +1,6 @@
 body {
-	-webkit-font-smoothing: antialiased;
-	background:#fffeff;
+  -webkit-font-smoothing: antialiased;
+  background:#fffeff;
 }
 
 ::selection {
@@ -9,14 +9,14 @@ body {
 
 a:focus,
 a:active {
-	outline: none !important;
+  outline: none !important;
 }
 
 #ribbon {
-	 background: url(../images/vimeo.svg) repeat-x top left;
-	 display: block;
-	 width: 100%;
-	 height: 5px;
+   background: url(../images/vimeo.svg) repeat-x top left;
+   display: block;
+   width: 100%;
+   height: 5px;
 }
 
 /*  Bootstrap Clearfix */
@@ -100,91 +100,98 @@ a:active {
 
 /* Bootstrap Overrides */
 .navbar {
-	min-height:60px;
+  min-height:60px;
 }
 
 .navbar-brand {
-	padding: 10px 15px;
-	height: 60px;
+  padding: 10px 15px;
+  height: 60px;
 }
 
+.navbar-nav>li>a.signature {
+  padding: 20px
+}
+
+.navbar-header {
+  float: left;
+}
+
+.navbar-right {
+  float: right!important;
+  margin-right: -15px;
+}
 
 .btn-white {
-	color: #d9d9d9;
-	border: 3px solid #d9d9d9;
-	background: transparent;
-	border-radius: 0;
+  color: #d9d9d9;
+  border: 3px solid #d9d9d9;
+  background: transparent;
+  border-radius: 0;
 }
 
 .btn-white:hover {
-		color: #fff;
-		border: 3px solid #fff;
-		background: transparent;
+    color: #fff;
+    border: 3px solid #fff;
+    background: transparent;
 }
 
 .tile {
-	z-index: 1;
-	margin-bottom: 30px;
+  z-index: 1;
+  margin-bottom: 30px;
 }
 
-.tile a .tile-info-container {
-	background-size: cover !important;
-	background-position: center center !important;
-	background-repeat: no-repeat;
-	position: relative;
-	z-index: 2;
-	height: 410px;
+.tile .tile-info-container {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 2;
+  height: 410px;
 }
-.tile a .tile-info-container .tile-gradient {
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 3;
+.tile .tile-info-container .tile-gradient {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
 }
 
-.tile a .tile-info-container .btn-container {
-	text-align: center;
-	padding-top: 180px;
-	padding-bottom: 40px;
-	z-index: 4;
-	position: relative;
+.tile .tile-info-container .btn-container {
+  text-align: center;
+  padding-top: 180px;
+  padding-bottom: 40px;
+  z-index: 4;
+  position: relative;
 }
-.tile a .tile-info-container .info-container {
-	padding: 10px;
-	z-index: 4;
-	bottom: 10px;
-	position: absolute;
+.tile .tile-info-container .info-container {
+  padding: 10px;
+  z-index: 4;
+  bottom: 10px;
+  position: absolute;
 }
-.tile a .tile-info-container .info-container h3 {
-	font-weight: bold;
-	color: #d9d9d9;
+.tile .tile-info-container .info-container h3 {
+  font-weight: bold;
+  color: #d9d9d9;
 }
-.tile a .tile-info-container .info-container .timestamp {
-	display: block;
-	color: #d9d9d9;
+.tile .tile-info-container .info-container .timestamp {
+  display: block;
+  color: #d9d9d9;
 }
 
 .tile a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 
-.tile a:hover .tile-info-container .btn-container .btn-white {
-	color: #fff;
-	border: 3px solid #fff;
-}
-
-.tile a:hover .tile-info-container .info-container h3, .tile a:hover .tile-info-container .info-container .timestamp{
-	color: #fff;
+.tile .tile-info-container .info-container h3, .tile .tile-info-container .info-container .timestamp{
+  color: #fff;
 }
 
 
