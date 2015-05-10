@@ -54,6 +54,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    $(document).ready(function(){
       $.ajax({
         url: 'http://vimeo.com/api/v2/channel/staffpicks/videos.json',
         dataType: 'json',
@@ -95,15 +96,25 @@
             // check if video element is already at the top of the screen
             if ($('.video-container').length > 0) {
 
-              $("html, body").animate({ scrollTop: 0 }, 600);
+              $("html, body").animate({ scrollTop: 67 }, 600);
               $('.video-container iframe').remove();
 
               $('.video-container').prepend('<iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+
+              $('.close').click(function(e){
+                e.preventDefault();
+                $('.video-container').remove();
+              });
             } else {
 
-              $('#content').prepend('<div class="video-container"><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
+              $('#content').prepend('<div class="video-container"><a href="#" class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
 
-              $("html, body").animate({ scrollTop: 0 }, 600);
+              $('.close').click(function(e){
+                e.preventDefault();
+                $('.video-container').remove();
+              });
+
+              $("html, body").animate({ scrollTop: 67 }, 600);
             };
           });
 
@@ -121,6 +132,7 @@
           });
         }
       });
+    });
     </script>
 
   </body>

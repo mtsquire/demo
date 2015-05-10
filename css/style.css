@@ -91,6 +91,10 @@ a:active {
   float: left;
 }
 
+.vimeo {
+  margin-top: 30px;
+}
+
 .navbar-right {
   float: right!important;
   margin-right: -15px;
@@ -213,12 +217,22 @@ a:active {
 .video-container {
   background:#000;
   padding: 0 30px;
-  margin-bottom: 30px;
+}
+
+.video-container .close {
+  color: #fff;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  z-index: 10000;
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }
 
 .video-container iframe {
   margin: 0px auto;
   display: block;
+  z-index: 5;
 }
 
 .video-container {
