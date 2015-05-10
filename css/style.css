@@ -112,6 +112,7 @@ a:active {
 .tile {
   z-index: 1;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .tile .tile-info-container {
@@ -150,6 +151,7 @@ a:active {
   z-index: 4;
   bottom: 10px;
   position: absolute;
+  width: 100%;
 }
 .tile .tile-info-container .info-container h3 {
   font-weight: bold;
@@ -169,6 +171,34 @@ a:active {
   color: #fff;
 }
 
+.tile .stats-container {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tile .likes, .tile .views {
+  position: absolute;
+  top: 5px;
+  color: #fff;
+}
+
+.tile .likes {
+  left: 5px;
+}
+
+.tile .views {
+  right: 5px;
+}
+
+.tile .tags {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  color: #fff;
+  z-index: 5;
+}
 
 /* Spinner */
 

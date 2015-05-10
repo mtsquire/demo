@@ -143,15 +143,25 @@
                       htmlTags.push('<span class="label label-primary">' + value + '</span>');
                   });
 
-              console.log(htmlTags);
+              console.log(tags)
 
-              $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+likes+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+views+'</div></div><div class="tile-info-container" style="background:url('+thumb+')"><div class="tile-gradient"></div><div class="btn-container"><a href="'+videoUrl+'" class="btn btn-white">Watch</a></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div></div>'+htmlTags.join(" ")+'</div>');
+              $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="tile-info-container" style="background:url('+thumb+')"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+(likes == undefined ? '0': likes)+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+(views == undefined ? '0': views)+'</div></div><div class="tile-gradient"></div><div class="btn-container"><a href="'+videoUrl+'" class="btn btn-white">Watch</a></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div>'+(tags == '' ? '': '<a href="#" class="tags" data-placement="top" rel="popover" data-popover-content="#tagPopover'+i+'"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a><div class="hide" id="tagPopover'+i+'">'+htmlTags.join(" ")+'</div>')+'</div></div>');
 
 
               $('.spinner').remove();
               $('.vimeo').css('display', 'block');
 
           }
+          $('[rel="popover"]').popover({
+              container: '.tile',
+              html: true,
+              content: function () {
+                  var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
+                  return clone;
+              }
+          }).click(function(e) {
+              e.preventDefault();
+          });
         }
       });
     </script>
