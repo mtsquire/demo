@@ -34,81 +34,8 @@
       </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container" id="content">
 
-<!--       <div class="row news-tiles">
-        <div class="col-md-4 col-sm-6 tile">
-          <a href="#">
-            <div class="tile-info-container">
-              <div class="tile-gradient"></div>
-              <div class="btn-container">
-                <div class="btn btn-white">Button</div>
-              </div>
-              <div class="info-container">
-                <h3>McDonagh: No excuse for the Rangers struggles</h3>
-                <span class="timestamp">1:16 PM</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 tile">
-          <a href="#">
-            <div class="tile-info-container">
-              <div class="tile-gradient"></div>
-              <div class="btn-container">
-                <div class="btn btn-white">Button</div>
-              </div>
-              <div class="info-container">
-                <h3>McDonagh: No excuse for the Rangers struggles</h3>
-                <span class="timestamp">1:16 PM</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 tile">
-          <a href="#">
-            <div class="tile-info-container">
-              <div class="tile-gradient"></div>
-              <div class="btn-container">
-                <div class="btn btn-white">Button</div>
-              </div>
-              <div class="info-container">
-                <h3>McDonagh: No excuse for the Rangers struggles</h3>
-                <span class="timestamp">1:16 PM</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 tile">
-          <a href="#">
-            <div class="tile-info-container">
-              <div class="tile-gradient"></div>
-              <div class="btn-container">
-                <div class="btn btn-white">Button</div>
-              </div>
-              <div class="info-container">
-                <h3>McDonagh: No excuse for the Rangers struggles</h3>
-                <span class="timestamp">1:16 PM</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 tile">
-          <a href="#">
-            <div class="tile-info-container">
-              <div class="tile-gradient"></div>
-              <div class="btn-container">
-                <div class="btn btn-white">Button</div>
-              </div>
-              <div class="info-container">
-                <h3>McDonagh: No excuse for the Rangers struggles</h3>
-                <span class="timestamp">1:16 PM</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 tile"><a href="#"><div class="tile-info-container"><div class="tile-gradient"></div><div class="btn-container"><div class="btn btn-white">Button</div></div><div class="info-container"><h3>McDonagh: No excuse for the Rangers struggles</h3><span class="timestamp">1:16 PM</span></div></div></a></div>
-      </div> -->
       <span class="spinner"></span>
       <div class="row news-tiles vimeo" style="display:none;">
 
@@ -128,6 +55,7 @@
         success:function(data){
           for (var i = 0; i < data.length; i++) {
               var item = data[i],
+                  videoId = item.id,
                   title = item.title,
                   description = item.description,
                   videoUrl = item.url,
@@ -139,22 +67,46 @@
                   htmlTags = [],
                   tags = item.tags.split(',');
 
+                  // push tags with proper html into array
                   $.each(tags, function(index, value) {
                       htmlTags.push('<span class="label label-primary">' + value + '</span>');
                   });
 
-              console.log(tags)
+              // build each video element with data
+              $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="tile-info-container" style="background:url('+thumb+')"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+(likes == undefined ? '0': likes)+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+(views == undefined ? '0': views)+'</div></div><div class="tile-gradient"></div><div class="btn-container"><div id="'+videoId+'" class="btn btn-white">Watch</div></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div>'+(tags == '' ? '': '<a href="#" class="tags" data-placement="top" rel="popover" data-popover-content="#tagPopover'+i+'"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a><div class="hide" id="tagPopover'+i+'">'+htmlTags.join(" ")+'</div>')+'</div></div>');
 
-              $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="tile-info-container" style="background:url('+thumb+')"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+(likes == undefined ? '0': likes)+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+(views == undefined ? '0': views)+'</div></div><div class="tile-gradient"></div><div class="btn-container"><a href="'+videoUrl+'" class="btn btn-white">Watch</a></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div>'+(tags == '' ? '': '<a href="#" class="tags" data-placement="top" rel="popover" data-popover-content="#tagPopover'+i+'"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a><div class="hide" id="tagPopover'+i+'">'+htmlTags.join(" ")+'</div>')+'</div></div>');
-
-
+              // remove loader after videos have finished loading
               $('.spinner').remove();
+
+              // show videos
               $('.vimeo').css('display', 'block');
 
           }
+
+          // click function to place video embed at top of the screen and scroll to it
+          $('.btn-white').click(function(){
+            var iframeVideoId = $(this).attr('id');
+
+            // check if video element is already at the top of the screen
+            if ($('.video-container').length > 0) {
+
+              $('.video-container iframe').remove()
+
+              $("html, body").animate({ scrollTop: 0 }, 600);
+
+              $('.video-container').prepend('<iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+            } else {
+              $("html, body").animate({ scrollTop: 0 }, 600);
+
+              $('#content').prepend('<div class="video-container"><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
+            };
+          });
+
+          // bootstrap html popover
           $('[rel="popover"]').popover({
               container: '.tile',
               html: true,
+              viewport: 'body',
               content: function () {
                   var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
                   return clone;
