@@ -105,6 +105,12 @@
                 e.preventDefault();
                 $('.video-container').remove();
               });
+
+              $(document).keydown(function(e) {
+                if (e.keyCode == 27) {
+                  $('.video-container').remove();
+                }
+              });
             } else {
 
               $('#content').prepend('<div class="video-container"><a href="#" class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
@@ -112,6 +118,12 @@
               $('.close').click(function(e){
                 e.preventDefault();
                 $('.video-container').remove();
+              });
+
+              $(document).keydown(function(e) {
+                if (e.keyCode == 27) {
+                  $('.video-container').remove();
+                }
               });
 
               $("html, body").animate({ scrollTop: 67 }, 600);
