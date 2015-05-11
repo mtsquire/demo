@@ -55,6 +55,29 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
+
+      var $viewport = $('html, body');
+
+      var scrollToNavBottom = function() {
+        $viewport.animate({ scrollTop: 67 }, 600);
+        // Stop the animation if the user scrolls. Defaults on .stop() should be fine
+        $viewport.bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+            if ( e.which > 0 || e.type === "mousedown" || e.type === "mousewheel"){
+                 $viewport.stop().unbind('scroll mousedown DOMMouseScroll mousewheel keyup'); // This identifies the scroll as a user action, stops the animation, then unbinds the event straight after (optional)
+            }
+        });
+      };
+
+      var scrollToTop = function() {
+        $viewport.animate({ scrollTop: 0 }, 600);
+        // Stop the animation if the user scrolls. Defaults on .stop() should be fine
+        $viewport.bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+            if ( e.which > 0 || e.type === "mousedown" || e.type === "mousewheel"){
+                 $viewport.stop().unbind('scroll mousedown DOMMouseScroll mousewheel keyup'); // This identifies the scroll as a user action, stops the animation, then unbinds the event straight after (optional)
+            }
+        });
+      };
+
       $.ajax({
         url: 'http://vimeo.com/api/v2/channel/staffpicks/videos.json',
         dataType: 'json',
@@ -96,37 +119,55 @@
             // check if video element is already at the top of the screen
             if ($('.video-container').length > 0) {
 
-              $("html, body").animate({ scrollTop: 67 }, 600);
+              // remove the existing video iframe
               $('.video-container iframe').remove();
 
+              // add the new video iframe that was selected
               $('.video-container').prepend('<iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 
+              // scroll to the bottom of the nav
+              scrollToNavBottom();
+
+              // remove video container if close button is clicked
               $('.close').click(function(e){
                 e.preventDefault();
                 $('.video-container').remove();
+
+                scrollToTop();
               });
 
-              $(document).keydown(function(e) {
+              // remove video container if escape key is pressed
+              $(document).keyup(function(e) {
                 if (e.keyCode == 27) {
                   $('.video-container').remove();
+
+                  scrollToTop();
                 }
               });
             } else {
 
+              // add video container and iframe to top of page
               $('#content').prepend('<div class="video-container"><a href="#" class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
 
+              // scroll to bottom of the nav after video has been added to page
+              scrollToNavBottom();
+
+              // remove video container if close button is clicked
               $('.close').click(function(e){
                 e.preventDefault();
                 $('.video-container').remove();
+
+                scrollToTop();
               });
 
-              $(document).keydown(function(e) {
+              // remove video container if escape key is clicked
+              $(document).keyup(function(e) {
                 if (e.keyCode == 27) {
                   $('.video-container').remove();
+
+                  scrollToTop();
                 }
               });
-
-              $("html, body").animate({ scrollTop: 67 }, 600);
             };
           });
 
