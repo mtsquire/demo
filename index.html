@@ -43,6 +43,9 @@
 
       <span class="spinner"></span>
       <div class="row news-tiles vimeo" style="display:none;"></div>
+      <div class="load-more">
+        <a href="#" class="btn btn-vimeo">Load More</a>
+      </div>
     </div>
 
 
@@ -54,7 +57,8 @@
     <script type="text/javascript">
     $(document).ready(function(){
 
-      var $viewport = $('html, body');
+      var $viewport = $('html, body'),
+          page = 1;
 
       var scrollToNavBottom = function() {
         $viewport.animate({ scrollTop: 67 }, 600);
@@ -76,117 +80,135 @@
         });
       };
 
-      $.ajax({
-        url: 'http://vimeo.com/api/v2/channel/staffpicks/videos.json',
-        dataType: 'json',
-        success:function(data){
-          for (var i = 0; i < data.length; i++) {
-              var item = data[i],
-                  videoId = item.id,
-                  title = item.title,
-                  description = item.description,
-                  videoUrl = item.url,
-                  userName = item.user_name,
-                  profileLink = item.user_url,
-                  thumb = item.thumbnail_large,
-                  likes = item.stats_number_of_likes,
-                  views = item.stats_number_of_plays,
-                  htmlTags = [],
-                  tags = item.tags.split(',');
+      var load = function(page){
+        $.ajax({
+          url: 'http://vimeo.com/api/v2/channel/staffpicks/videos.json?page='+page+'',
+          dataType: 'json',
+          success:function(data){
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i],
+                    videoId = item.id,
+                    title = item.title,
+                    description = item.description,
+                    videoUrl = item.url,
+                    userName = item.user_name,
+                    profileLink = item.user_url,
+                    thumb = item.thumbnail_large,
+                    likes = item.stats_number_of_likes,
+                    views = item.stats_number_of_plays,
+                    htmlTags = [],
+                    tags = item.tags.split(',');
 
-                  // push tags with proper html into array
-                  $.each(tags, function(index, value) {
-                      htmlTags.push('<span class="label label-primary">' + value + '</span>');
-                  });
+                    // push tags with proper html into array
+                    $.each(tags, function(index, value) {
+                        htmlTags.push('<span class="label label-primary">' + value + '</span>');
+                    });
 
-              // build each video element with data
-              $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="tile-info-container" style="background:url('+thumb+')"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+(likes == undefined ? '0': likes)+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+(views == undefined ? '0': views)+'</div></div><div class="tile-gradient"></div><div class="btn-container"><div id="'+videoId+'" class="btn btn-white">Watch</div></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div>'+(tags == '' ? '': '<a href="#" class="tags" data-placement="top" rel="popover" data-popover-content="#tagPopover'+i+'"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a><div class="hide" id="tagPopover'+i+'">'+htmlTags.join(" ")+'</div>')+'</div></div>');
+                // build each video element with data
+                $('.vimeo').append('<div class="col-md-4 col-sm-6 tile"><div class="tile-info-container" style="background:url('+thumb+')"><div class="stats-container"><div class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> '+(likes == undefined ? '0': likes)+'</div><div class="views"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> '+(views == undefined ? '0': views)+'</div></div><div class="tile-gradient"></div><div class="btn-container"><div id="'+videoId+'" class="btn btn-white">Watch</div></div><div class="info-container"><h3>'+title+'</h3><a href="'+profileLink+'" class="timestamp">'+userName+'</a></div>'+(tags == '' ? '': '<a href="#" class="tags" data-placement="top" rel="popover" data-popover-content="#tagPopover'+i+'"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a><div class="hide" id="tagPopover'+i+'">'+htmlTags.join(" ")+'</div>')+'</div></div>');
 
-              // remove loader after videos have finished loading
-              $('.spinner').remove();
+                // remove loader after videos have finished loading
+                $('.spinner').remove();
 
-              // show videos
-              $('.vimeo').css('display', 'block');
+                // show videos
+                $('.vimeo').css('display', 'block');
 
-          }
+            }
 
-          // click function to place video embed at top of the screen and scroll to it
-          $('.btn-white').click(function(){
-            var iframeVideoId = $(this).attr('id');
+            // click function to place video embed at top of the screen and scroll to it
+            $('.btn-white').click(function(){
+              var iframeVideoId = $(this).attr('id');
 
-            // check if video element is already at the top of the screen
-            if ($('.video-container').length > 0) {
+              // check if video element is already at the top of the screen
+              if ($('.video-container').length > 0) {
 
-              // remove the existing video iframe
-              $('.video-container iframe').remove();
+                // remove the existing video iframe
+                $('.video-container iframe').remove();
 
-              // add the new video iframe that was selected
-              $('.video-container').prepend('<iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+                // add the new video iframe that was selected
+                $('.video-container').prepend('<iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 
-              // scroll to the bottom of the nav
-              scrollToNavBottom();
+                // scroll to the bottom of the nav
+                scrollToNavBottom();
 
-              // remove video container if close button is clicked
-              $('.close').click(function(e){
-                e.preventDefault();
-                $('.video-container').remove();
-
-                scrollToTop();
-              });
-
-              // remove video container if escape key is pressed
-              $(document).keyup(function(e) {
-                if (e.keyCode == 27) {
+                // remove video container if close button is clicked
+                $('.close').click(function(e){
+                  e.preventDefault();
                   $('.video-container').remove();
 
                   scrollToTop();
+                });
+
+                // remove video container if escape key is pressed
+                $(document).keyup(function(e) {
+                  if (e.keyCode == 27) {
+                    $('.video-container').remove();
+
+                    scrollToTop();
+                  }
+                });
+              } else {
+
+                // add video container and iframe to top of page
+                $('#content').prepend('<div class="video-container"><a href="#" class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
+
+                // scroll to bottom of the nav after video has been added to page
+                scrollToNavBottom();
+
+                // remove video container if close button is clicked
+                $('.close').click(function(e){
+                  e.preventDefault();
+                  $('.video-container').remove();
+
+                  scrollToTop();
+                });
+
+                // remove video container if escape key is clicked
+                $(document).keyup(function(e) {
+                  if (e.keyCode == 27) {
+                    $('.video-container').remove();
+
+                    scrollToTop();
+                  }
+                });
+              };
+            });
+
+            // bootstrap html popover
+            $('[rel="popover"]').popover({
+                container: '.tile',
+                html: true,
+                viewport: 'body',
+                content: function () {
+                    var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
+                    return clone;
                 }
-              });
+            }).click(function(e) {
+                e.preventDefault();
+            });
+          }, // end success
+          error: function(xhr) {
+            if (xhr.status == '403') {
+              $('.load-more > a').remove();
+              $('.load-more').append('<p>All videos in this channel have been loaded.</p>')
             } else {
+              $('.spinner').remove();
+              $('#content').append('<p>Error! Please refresh the page to try again.</p>');
+            }
+          } // end error
+        }); // end ajax
+      }; // close load
 
-              // add video container and iframe to top of page
-              $('#content').prepend('<div class="video-container"><a href="#" class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><iframe src="https://player.vimeo.com/video/'+iframeVideoId+'?autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
+      load(page);
 
-              // scroll to bottom of the nav after video has been added to page
-              scrollToNavBottom();
 
-              // remove video container if close button is clicked
-              $('.close').click(function(e){
-                e.preventDefault();
-                $('.video-container').remove();
+      $('.load-more > a').click(function(e){
+        e.preventDefault();
+        page++
+        load(page)
+      });
 
-                scrollToTop();
-              });
 
-              // remove video container if escape key is clicked
-              $(document).keyup(function(e) {
-                if (e.keyCode == 27) {
-                  $('.video-container').remove();
-
-                  scrollToTop();
-                }
-              });
-            };
-          });
-
-          // bootstrap html popover
-          $('[rel="popover"]').popover({
-              container: '.tile',
-              html: true,
-              viewport: 'body',
-              content: function () {
-                  var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
-                  return clone;
-              }
-          }).click(function(e) {
-              e.preventDefault();
-          });
-        }, // end success
-        error: function() {
-          $('.spinner').remove();
-          $('#content').append('<p>Error! Please refresh the page to try again.</p>')
-        } // end error
-      }); // end ajax
     }); // end document.ready
     </script>
 
