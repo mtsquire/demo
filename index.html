@@ -42,9 +42,7 @@
     <div class="container">
 
       <span class="spinner"></span>
-      <div class="row news-tiles vimeo" style="display:none;">
-
-      </div>
+      <div class="row news-tiles vimeo" style="display:none;"></div>
     </div>
 
 
@@ -183,9 +181,13 @@
           }).click(function(e) {
               e.preventDefault();
           });
-        }
-      });
-    });
+        }, // end success
+        error: function() {
+          $('.spinner').remove();
+          $('#content').append('<p>Error! Please refresh the page to try again.</p>')
+        } // end error
+      }); // end ajax
+    }); // end document.ready
     </script>
 
   </body>
